@@ -2,7 +2,7 @@ import { z } from 'zod'
 
 const CreateMomentSchema = z.object({
   title: z.string().min(1, 'Title is required'),
-  date: z.date(),
+  date: z.string(),
   images: z.string(),
 })
 

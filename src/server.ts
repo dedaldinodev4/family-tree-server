@@ -10,6 +10,12 @@ import fastifySwaggerUi from "@fastify/swagger-ui";
 import { createMember } from "./routes/create-member";
 import { getAllMembers } from "./routes/get-all-members";
 import { getOneMember } from "./routes/get-one-member";
+import { updateMember } from "./routes/update-member";
+import { deleteMember } from "./routes/delete-member";
+import { createMoment } from "./routes/create-moment";
+import { getAllMoments } from "./routes/get-all-moments";
+import { getOneMoment } from "./routes/get-one-moment";
+
 
 
 const server = fastify({
@@ -19,6 +25,7 @@ const server = fastify({
 server.setValidatorCompiler(validatorCompiler);
 server.setSerializerCompiler(serializerCompiler);
 
+//* swagger *//
 server.register(fastifySwagger, {
   swagger: {
     consumes: ['application/json'],
@@ -36,9 +43,17 @@ server.register(fastifySwaggerUi, {
   routePrefix: '/docs'
 })
 
+//* Members routes *//
 server.register(createMember);
-//server.register(getAllMembers);
-//server.register(getOneMember);
+server.register(getAllMembers);
+server.register(getOneMember);
+server.register(updateMember);
+server.register(deleteMember);
+
+//* Moments routes *//
+server.register(createMoment);
+server.register(getAllMoments);
+server.register(getOneMoment);
 
 server.get('/', function (req, reply) {
   return reply.send('Hello API')
