@@ -1,11 +1,11 @@
 import { z } from 'zod'
 
 const CreateMemberSchema = z.object({
-  name: z.string().min(3, 'Name is required'),
-  phone: z.string().optional(),
-  birthDate: z.date().optional(),
-  parentId: z.string().optional(),
-  photo: z.string().optional(),
+  name: z.string().min(4),
+  phone: z.string().optional().nullable(),
+  birthDate: z.string().optional().nullable(),
+  parentId: z.string().optional().nullable(),
+  photo: z.string().optional().nullable(),
 })
 
 const UpdateMemberSchema = CreateMemberSchema.partial();
