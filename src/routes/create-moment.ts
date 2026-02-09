@@ -12,6 +12,8 @@ export const createMoment = async (app: FastifyInstance) => {
     .withTypeProvider<ZodTypeProvider>()
     .post('/moments', {
       schema: {
+        summary: "Create a moment",
+        tags: ['moments'],
         body: CreateMomentSchema,
         response: {
           201: z.object({

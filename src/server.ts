@@ -51,9 +51,9 @@ server.register(updateMember);
 server.register(deleteMember);
 
 //* Moments routes *//
-//server.register(createMoment);
-//server.register(getAllMoments);
-//server.register(getOneMoment);
+server.register(createMoment);
+server.register(getAllMoments);
+server.register(getOneMoment);
 
 server.get('/', function (req, reply) {
   return reply.send('Hello API')

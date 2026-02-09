@@ -11,6 +11,8 @@ export const getOneMoment = async (app: FastifyInstance) => {
     .withTypeProvider<ZodTypeProvider>()
     .get('/moments/:id', {
       schema: {
+        summary: "Get a moment",
+        tags: ['moments'],
         params: z.object({
           id: z.string(),
         }),
