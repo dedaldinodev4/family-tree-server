@@ -3,6 +3,8 @@ import { ZodTypeProvider } from 'fastify-type-provider-zod';
 import { z } from "zod"
 
 import { prisma } from "@/lib/prisma"
+import { MemberSchema } from "@/schemas/member.schema";
+import { BadRequest } from "./_errors/bad-request";
 
 
 export const getOneMember = async (app: FastifyInstance) => {
@@ -16,7 +18,9 @@ export const getOneMember = async (app: FastifyInstance) => {
         params: z.object({
           id: z.string(),
         }),
-        response: {},
+        response: {
+          200: MemberSchema,
+        },
       },
     }, async (request, reply) => {
 
@@ -27,8 +31,10 @@ export const getOneMember = async (app: FastifyInstance) => {
         }
       })
 
-      return reply.status(200).send({
-        member
-      })
+      if (!member) {
+        throw new BadRequest('member does not exist')
+      }
+
+      return reply.status(200).send(member)
     })
 }

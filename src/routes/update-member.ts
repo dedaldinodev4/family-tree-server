@@ -7,6 +7,7 @@ import {
   MemberSchema,
   UpdateMemberSchema
 } from "@/schemas/member.schema";
+import { BadRequest } from "./_errors/bad-request";
 
 
 export const updateMember = async (app: FastifyInstance) => {
@@ -45,7 +46,7 @@ export const updateMember = async (app: FastifyInstance) => {
         })
 
         if (!member) {
-          throw Error('Member does not exist.')
+          throw new BadRequest('Member does not exist.')
         }
 
 

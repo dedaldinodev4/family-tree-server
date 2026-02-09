@@ -3,6 +3,8 @@ import { ZodTypeProvider } from 'fastify-type-provider-zod';
 import { z } from "zod"
 
 import { prisma } from "@/lib/prisma"
+import { BadRequest } from "./_errors/bad-request";
+import { MomentSchema } from "@/schemas/moment.schema";
 
 
 export const getOneMoment = async (app: FastifyInstance) => {
@@ -16,7 +18,9 @@ export const getOneMoment = async (app: FastifyInstance) => {
         params: z.object({
           id: z.string(),
         }),
-        response: {},
+        response: {
+          200: MomentSchema
+        },
       },
     }, async (request, reply) => {
 
@@ -28,11 +32,9 @@ export const getOneMoment = async (app: FastifyInstance) => {
       })
 
       if (!moment) {
-        throw Error('Moment does not exist.')
+        throw new BadRequest('Moment does not exist.')
       }
 
-      return reply.status(200).send({
-        moment
-      })
+      return reply.status(200).send(moment)
     })
 }

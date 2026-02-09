@@ -16,6 +16,7 @@ import { deleteMember } from "./routes/delete-member";
 import { createMoment } from "./routes/create-moment";
 import { getAllMoments } from "./routes/get-all-moments";
 import { getOneMoment } from "./routes/get-one-moment";
+import { errorHandler } from "./helpers/error-handler";
 
 
 
@@ -54,6 +55,8 @@ server.register(deleteMember);
 server.register(createMoment);
 server.register(getAllMoments);
 server.register(getOneMoment);
+
+server.setErrorHandler(errorHandler);
 
 server.get('/', function (req, reply) {
   return reply.send('Hello API')

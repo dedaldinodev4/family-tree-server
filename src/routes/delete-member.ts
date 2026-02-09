@@ -3,6 +3,7 @@ import { ZodTypeProvider } from 'fastify-type-provider-zod';
 import { z } from "zod"
 
 import { prisma } from "@/lib/prisma"
+import { BadRequest } from "./_errors/bad-request";
 
 
 export const deleteMember = async (app: FastifyInstance) => {
@@ -16,7 +17,11 @@ export const deleteMember = async (app: FastifyInstance) => {
         params: z.object({
           id: z.string(),
         }),
-        response: {},
+        response: {
+          204: z.object({
+            message: z.string(),
+          })
+        }
       },
     }, async (request, reply) => {
 
@@ -28,7 +33,7 @@ export const deleteMember = async (app: FastifyInstance) => {
       })
 
       if (!member) {
-        throw Error('Member does not exist.')
+        throw new BadRequest('Member does not exist.')
       }
 
       const deletedMember = await prisma.member.delete({
@@ -37,6 +42,9 @@ export const deleteMember = async (app: FastifyInstance) => {
         }
       })
 
-      return reply.status(204).send({})
+      return reply.status(204).send({
+        message: 'Member was deleted!'
+      })
+
     })
 }
