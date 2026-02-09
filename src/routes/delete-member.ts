@@ -11,6 +11,8 @@ export const deleteMember = async (app: FastifyInstance) => {
     .withTypeProvider<ZodTypeProvider>()
     .delete('/members/:id', {
       schema: {
+        summary: "Delete a member",
+        tags: ['members'],
         params: z.object({
           id: z.string(),
         }),

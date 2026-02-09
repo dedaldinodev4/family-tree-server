@@ -12,6 +12,8 @@ export const getAllMembers = async (app: FastifyInstance) => {
     .withTypeProvider<ZodTypeProvider>()
     .get('/members', {
       schema: {
+        summary: "Get all members",
+        tags: ['members'],
         response: {
           200: z.object({
             data: z.array(MemberSchema)

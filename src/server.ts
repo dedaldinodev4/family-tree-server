@@ -12,6 +12,7 @@ import { getAllMembers } from "./routes/get-all-members";
 import { getOneMember } from "./routes/get-one-member";
 import { updateMember } from "./routes/update-member";
 import { deleteMember } from "./routes/delete-member";
+
 import { createMoment } from "./routes/create-moment";
 import { getAllMoments } from "./routes/get-all-moments";
 import { getOneMoment } from "./routes/get-one-moment";
@@ -27,9 +28,8 @@ server.setSerializerCompiler(serializerCompiler);
 
 //* swagger *//
 server.register(fastifySwagger, {
-  swagger: {
-    consumes: ['application/json'],
-    produces: ['application/json'],
+  openapi: {
+    openapi: '3.0.3',
     info: {
       title: "Family-tree",
       description: "A minimal backend built",
@@ -51,9 +51,9 @@ server.register(updateMember);
 server.register(deleteMember);
 
 //* Moments routes *//
-server.register(createMoment);
-server.register(getAllMoments);
-server.register(getOneMoment);
+//server.register(createMoment);
+//server.register(getAllMoments);
+//server.register(getOneMoment);
 
 server.get('/', function (req, reply) {
   return reply.send('Hello API')

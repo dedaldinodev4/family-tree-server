@@ -15,6 +15,8 @@ export const updateMember = async (app: FastifyInstance) => {
     .withTypeProvider<ZodTypeProvider>()
     .put('/members/:id', {
       schema: {
+        summary: "Update a member",
+        tags: ['members'],
         body: UpdateMemberSchema,
         params: z.object({
           id: z.string(),

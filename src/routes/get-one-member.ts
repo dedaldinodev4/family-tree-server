@@ -11,6 +11,8 @@ export const getOneMember = async (app: FastifyInstance) => {
     .withTypeProvider<ZodTypeProvider>()
     .get('/members/:id', {
       schema: {
+        summary: "Get a member",
+        tags: ['members'],
         params: z.object({
           id: z.string(),
         }),

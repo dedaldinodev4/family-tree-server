@@ -12,6 +12,8 @@ export const createMember = async (app: FastifyInstance) => {
     .withTypeProvider<ZodTypeProvider>()
     .post('/members', {
       schema: {
+        summary: "Create a member",
+        tags: ['members'],
         body: CreateMemberSchema,
         response: {
           201: z.object({
