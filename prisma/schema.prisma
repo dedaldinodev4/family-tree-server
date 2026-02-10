@@ -17,7 +17,7 @@ model Member {
   id         String   @id @default(uuid())
   name       String
   parentId   String?
-  birthDate  String?
+  birthDate  DateTime?
   phone      String?
   photo      String?
   role       String?

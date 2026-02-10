@@ -4,7 +4,7 @@ const CreateMemberSchema = z.object({
   name: z.string({ error: "Minimal error"}).min(4),
   phone: z.string().optional().nullable(),
   role: z.string().optional().nullable(),
-  birthDate: z.string().optional().nullable(),
+  birthDate: z.date().optional().nullable(),
   parentId: z.string().optional().nullable(),
   photo: z.string().optional().nullable(),
 })
