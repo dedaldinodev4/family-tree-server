@@ -1,8 +1,10 @@
 import { z } from 'zod'
 
 const CreateMomentSchema = z.object({
-  title: z.string().min(1, 'Title is required'),
-  date: z.string(),
+  title: z.string().min(1),
+  date: z.preprocess((val) => {
+    if (typeof val === "string" || val instanceof Date) return new Date(val);
+  }, z.date()),
   images: z.string(),
 })
 

@@ -29,7 +29,7 @@ model Member {
 model Moment {
   id         String   @id @default(uuid())
   title      String
-  date       String
+  date       DateTime
   images     String
   cretaed_at DateTime @default(now())
 

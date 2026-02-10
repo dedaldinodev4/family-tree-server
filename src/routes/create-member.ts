@@ -27,7 +27,7 @@ export const createMember = async (app: FastifyInstance) => {
 
         const { name,
           birthDate,
-          parentId,
+          parentId, role,
           phone, photo
         } = CreateMemberSchema.parse(request.body)
 
@@ -36,6 +36,7 @@ export const createMember = async (app: FastifyInstance) => {
           data: {
             name,
             birthDate,
+            role,
             parentId,
             phone, photo
           }

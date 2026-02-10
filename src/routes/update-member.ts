@@ -34,7 +34,7 @@ export const updateMember = async (app: FastifyInstance) => {
         const { id } = request.params;
         const { name,
           birthDate,
-          parentId,
+          parentId, role,
           phone, photo
         } = UpdateMemberSchema.parse(request.body)
 
@@ -54,6 +54,7 @@ export const updateMember = async (app: FastifyInstance) => {
           where: { id },
           data: {
             name,
+            role,
             birthDate,
             parentId,
             phone, photo
