@@ -2,10 +2,12 @@ import fastify from "fastify";
 import { 
   serializerCompiler, 
   validatorCompiler,
-  jsonSchemaTransform
+  jsonSchemaTransform,
+  type ZodTypeProvider
 } from 'fastify-type-provider-zod';
 import fastifySwagger from "@fastify/swagger";
 import fastifySwaggerUi from "@fastify/swagger-ui";
+import fastifyCors from "@fastify/cors";
 
 import { createMember } from "./routes/create-member";
 import { getAllMembers } from "./routes/get-all-members";
@@ -20,8 +22,10 @@ import { errorHandler } from "./helpers/error-handler";
 
 
 
-const server = fastify({
-  logger: false
+const server = fastify().withTypeProvider<ZodTypeProvider>()
+
+server.register(fastifyCors, {
+  origin: "*",
 })
 
 server.setValidatorCompiler(validatorCompiler);
